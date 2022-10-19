@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demospringsecurity.mapper.ProductMapper">
+
+    <select id="selectAll" resultType="com.example.demospringsecurity.model.Product">
+        select * from "demoSpringSecurity".product
+    </select>
+
+    <select id="select" resultType="com.example.demospringsecurity.model.Product">
+        select * from "demoSpringSecurity".product where id = #{id}
+    </select>
+
+    <insert id="insert">
+        insert into "demoSpringSecurity".product ("name", brand, madein, price) values (#{name}, #{brand}, #{madein}, #{price});
+    </insert>
+
+    <update id="update">
+        update "demoSpringSecurity".product
+        set "name" = #{name},
+            brand = #{brand},
+            madein = #{madein},
+            price = #{price}
+            where id = #{id}
+
+    </update>
+
+    <delete id="delete">
+        delete from "demoSpringSecurity".product
+        where id = #{id}
+    </delete>
+
+</mapper>

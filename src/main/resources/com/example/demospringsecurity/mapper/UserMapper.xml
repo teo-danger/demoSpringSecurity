@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demospringsecurity.mapper.UserMapper">
+
+    <select id="select" resultMap="userDetails">
+        select users.*, roles.name ROLE_NAME
+        from "demoSpringSecurity".users users
+                 join "demoSpringSecurity".users_roles user_roles
+                      on users.user_id = user_roles.user_id
+                 join "demoSpringSecurity".roles roles
+                      on user_roles.role_id = roles.role_id
+        where username = #{username}
+    </select>
+
+    <resultMap id="userDetails" type="com.example.demospringsecurity.model.User">
+        <result property="id" column="USER_ID"/>
+        <result property="username" column="USERNAME"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="enabled" column="ENABLED"/>
+        <collection property="roles" javaType="java.util.ArrayList" ofType="com.example.demospringsecurity.model.Role">
+            <result property="id" column="ROLE_ID"/>
+            <result property="name" column="ROLE_NAME"/>
+        </collection>
+    </resultMap>
+
+</mapper>
